@@ -6,7 +6,8 @@ public abstract class ColorCard extends UnoCard
 
     public void setColor(String color) { this.color = color; }
 
-    public ColorCard(String color) {
+    public ColorCard(String color)
+    {
         this.color = color;
     }
 }

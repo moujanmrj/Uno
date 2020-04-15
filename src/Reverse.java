@@ -1,6 +1,7 @@
 public class Reverse extends ActionCard
 {
-    public Reverse(String color) {
+    public Reverse(String color)
+    {
         super(color);
     }
 }

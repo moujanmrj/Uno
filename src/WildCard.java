@@ -1,4 +1,4 @@
-public abstract class WildCard extends UnoCard
+public class WildCard extends UnoCard
 {
     String cardName;
 
@@ -7,11 +7,13 @@ public abstract class WildCard extends UnoCard
     public void setCardName(String cardName) { this.cardName = cardName; }
 
     @Override
-    public void setValue(int value) {
+    public void setValue(int value)
+    {
         value = 50;
     }
 
-    public WildCard(String cardName) {
+    public WildCard(String cardName)
+    {
         this.cardName = cardName;
     }
 }

@@ -68,12 +68,14 @@ public class Player
                 case "black":
                     System.out.println("****************");
                     System.out.println("*              *");
-                    System.out.println("* " + print.getClass().getName());
+                    System.out.println("*   " + print.getClass().getName());
                     System.out.println("*              *");
                     System.out.println("****************");
                     break;
             }
         }
+        System.out.println("______________________________________________________________________");
+        System.out.println();
     }
 
     public int TotalScore()

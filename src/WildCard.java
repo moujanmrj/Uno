@@ -1,4 +1,4 @@
-public class WildCard extends UnoCard
+public abstract class WildCard extends UnoCard
 {
     String cardName;
 
@@ -12,9 +12,9 @@ public class WildCard extends UnoCard
         value = 50;
     }
 
-    public WildCard(String color,String cardName)
+    public WildCard(String color, int value,String cardName)
     {
-        super(color,50);
+        super(color,value);
         this.cardName = cardName;
     }
 }

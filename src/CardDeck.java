@@ -48,10 +48,10 @@ public class CardDeck
             cards.add(new Draw("yellow","draw +2"));
         }
 
-        for (int i=0; i<2; i++)
+        for (int i=0; i<4; i++)
         {
-            cards.add(new WildCard("black","wild draw +4"));
-            cards.add(new WildCard("black","wild color"));
+            cards.add(new WildDraw("black","wild draw +4"));
+            cards.add(new WildColor("black","wild color"));
         }
     }
 

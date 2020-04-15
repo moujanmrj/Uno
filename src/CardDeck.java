@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class CardDeck
 {
@@ -50,6 +52,19 @@ public class CardDeck
         {
             cards.add(new WildCard("wildDraw"));
             cards.add(new WildCard("wildColor"));
+        }
+    }
+
+    public void shuffledCards(ArrayList<UnoCard> playerCards)
+    {
+        Iterator<UnoCard> iterator = cards.iterator();
+        Collections.shuffle(cards);
+        int i=0;
+        while(iterator.hasNext() && i<7)
+        {
+            playerCards.add(cards.get(i));
+            cards.remove(i);
+            i++;
         }
     }
 }

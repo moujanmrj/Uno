@@ -1,2 +1,4 @@
-public class Table {
+public class Table
+{
+    private CardDeck playCards;
 }

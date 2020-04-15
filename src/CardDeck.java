@@ -17,41 +17,41 @@ public class CardDeck
         {
             for (int i=1; i<10; i++)
             {
-                cards.add(new NumberCard("blue", i));
-                cards.add(new NumberCard("red", i));
-                cards.add(new NumberCard("green", i));
-                cards.add(new NumberCard("yellow", i));
+                cards.add(new NumberCard("blue", i,"number"));
+                cards.add(new NumberCard("red", i,"number"));
+                cards.add(new NumberCard("green", i,"number"));
+                cards.add(new NumberCard("yellow", i,"number"));
 
             }
         }
 
-        cards.add(new NumberCard("blue", 0));
-        cards.add(new NumberCard("red", 0));
-        cards.add(new NumberCard("green", 0));
-        cards.add(new NumberCard("yellow", 0));
+        cards.add(new NumberCard("blue", 0,"number"));
+        cards.add(new NumberCard("red", 0,"number"));
+        cards.add(new NumberCard("green", 0,"number"));
+        cards.add(new NumberCard("yellow", 0,"number"));
 
         for (int i=0; i<2; i++)
         {
-            cards.add(new Reverse("blue"));
-            cards.add(new Reverse("red"));
-            cards.add(new Reverse("green"));
-            cards.add(new Reverse("yellow"));
+            cards.add(new Reverse("blue","reverse"));
+            cards.add(new Reverse("red","reverse"));
+            cards.add(new Reverse("green","reverse"));
+            cards.add(new Reverse("yellow","reverse"));
 
-            cards.add(new Skip("blue"));
-            cards.add(new Skip("red"));
-            cards.add(new Skip("green"));
-            cards.add(new Skip("yellow"));
+            cards.add(new Skip("blue","skip"));
+            cards.add(new Skip("red","skip"));
+            cards.add(new Skip("green","skip"));
+            cards.add(new Skip("yellow","skip"));
 
-            cards.add(new Draw("blue"));
-            cards.add(new Draw("red"));
-            cards.add(new Draw("green"));
-            cards.add(new Draw("yellow"));
+            cards.add(new Draw("blue","draw +2"));
+            cards.add(new Draw("red","draw +2"));
+            cards.add(new Draw("green","draw +2"));
+            cards.add(new Draw("yellow","draw +2"));
         }
 
         for (int i=0; i<2; i++)
         {
-            cards.add(new WildCard("wildDraw"));
-            cards.add(new WildCard("wildColor"));
+            cards.add(new WildCard("black","wild draw +4"));
+            cards.add(new WildCard("black","wild color"));
         }
     }
 

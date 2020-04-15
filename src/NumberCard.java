@@ -12,9 +12,9 @@ public class NumberCard extends ColorCard
         value = getNumber();
     }
 
-    public NumberCard(String color, int number)
+    public NumberCard(String color, int number,String name)
     {
-        super(color);
+        super(color, number,name);
         this.number = number;
     }
 }

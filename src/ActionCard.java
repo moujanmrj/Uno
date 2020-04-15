@@ -1,8 +1,8 @@
 public abstract class ActionCard extends ColorCard
 {
-    public ActionCard(String color)
+    public ActionCard(String color, int value,String name)
     {
-        super(color);
+        super(color,20,name);
     }
 
     @Override

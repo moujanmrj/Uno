@@ -12,8 +12,9 @@ public class WildCard extends UnoCard
         value = 50;
     }
 
-    public WildCard(String cardName)
+    public WildCard(String color,String cardName)
     {
+        super(color,50);
         this.cardName = cardName;
     }
 }

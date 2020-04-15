@@ -1,7 +1,7 @@
 public class Draw extends ActionCard
 {
-    public Draw(String color)
+    public Draw(String color, String name)
     {
-        super(color);
+        super(color, 20,name);
     }
 }

@@ -1,13 +1,15 @@
 public abstract class ColorCard extends UnoCard
 {
-    private String color;
+    String cardName;
 
-    public String getColor() { return color; }
+    public String getCardName() { return cardName; }
 
-    public void setColor(String color) { this.color = color; }
+    public void setCardName(String cardName) { this.cardName = cardName; }
 
-    public ColorCard(String color)
+    public ColorCard(String color, int value,String cardName)
     {
-        this.color = color;
+        super(color,value);
+        this.cardName = cardName;
+
     }
 }

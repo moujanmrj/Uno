@@ -23,56 +23,7 @@ public class Player
     {
         for (UnoCard print : playerCards)
         {
-            switch (print.getColor()) {
-                case "blue":
-                    System.out.println("\u001B[34m" + "****************" + "\u001B[0m");
-                    System.out.println("\u001B[34m" + "*              *" + "\u001B[0m");
-                    if (print.getClass().getName().equals("NumberCard"))
-                        System.out.println("\u001B[34m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
-                    else
-                        System.out.println("\u001B[34m" + "*    " + print.getClass().getName() + "\u001B[0m");
-                    System.out.println("\u001B[34m" + "*              *" + "\u001B[0m");
-                    System.out.println("\u001B[34m" + "****************" + "\u001B[0m");
-                    break;
-                case "red":
-                    System.out.println("\u001B[31m" + "****************" + "\u001B[0m");
-                    System.out.println("\u001B[31m" + "*              *" + "\u001B[0m");
-                    if (print.getClass().getName().equals("NumberCard"))
-                        System.out.println("\u001B[31m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
-                    else
-                        System.out.println("\u001B[31m" + "*    " + print.getClass().getName() + "\u001B[0m");
-                    System.out.println("\u001B[31m" + "*              *" + "\u001B[0m");
-                    System.out.println("\u001B[31m" + "****************" + "\u001B[0m");
-
-                    break;
-                case "green":
-                    System.out.println("\u001B[32m" + "****************" + "\u001B[0m");
-                    System.out.println("\u001B[32m" + "*              *" + "\u001B[0m");
-                    if (print.getClass().getName().equals("NumberCard"))
-                        System.out.println("\u001B[32m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
-                    else
-                        System.out.println("\u001B[32m" + "*    " + print.getClass().getName() + "\u001B[0m");
-                    System.out.println("\u001B[32m" + "*              *" + "\u001B[0m");
-                    System.out.println("\u001B[32m" + "****************" + "\u001B[0m");
-                    break;
-                case "yellow":
-                    System.out.println("\u001B[33m" + "****************" + "\u001B[0m");
-                    System.out.println("\u001B[33m" + "*              *" + "\u001B[0m");
-                    if (print.getClass().getName().equals("NumberCard"))
-                        System.out.println("\u001B[33m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
-                    else
-                        System.out.println("\u001B[33m" + "*    " + print.getClass().getName() + "\u001B[0m");
-                    System.out.println("\u001B[33m" + "*              *" + "\u001B[0m");
-                    System.out.println("\u001B[33m" + "****************" + "\u001B[0m");
-                    break;
-                case "black":
-                    System.out.println("****************");
-                    System.out.println("*              *");
-                    System.out.println("*   " + print.getClass().getName());
-                    System.out.println("*              *");
-                    System.out.println("****************");
-                    break;
-            }
+           cardDeck.printCard(print);
         }
         System.out.println("______________________________________________________________________");
         System.out.println();

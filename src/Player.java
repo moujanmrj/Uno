@@ -5,15 +5,23 @@ public class Player
 
     private ArrayList<UnoCard> playerCards;
     private CardDeck cardDeck;
+    private String name;
+    private int score;
+
 
     public ArrayList<UnoCard> getPlayerCards() { return playerCards; }
     public CardDeck getCardDeck() { return cardDeck; }
+    public String getName() { return name; }
+    public int getScore() { return score; }
 
     public void setPlayerCards(ArrayList<UnoCard> playerCards) { this.playerCards = playerCards; }
     public void setCardDeck(CardDeck cardDeck) { this.cardDeck = cardDeck; }
+    public void setName(String name) { this.name = name; }
+    public void setScore(int score) { this.score = score; }
 
-    public Player(CardDeck cardDeck)
+    public Player(CardDeck cardDeck, String name)
     {
+        this.name = name;
         this.cardDeck = cardDeck;
         playerCards = new ArrayList<>();
         cardDeck.shuffledCards(playerCards);
@@ -36,6 +44,7 @@ public class Player
         {
             total += score.getValue();
         }
+        setScore(total);
         return total;
     }
 }

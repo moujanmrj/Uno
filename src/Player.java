@@ -74,9 +74,7 @@ public class Player implements Comparable<Player>
         return validMove;
     }
 
-
-
-
+    
     public void play(Table table)
     {
         boolean block = false;
@@ -84,11 +82,6 @@ public class Player implements Comparable<Player>
         {
             block = true;
             table.getTableCards().get(table.getTableCards().size()-1).setBlocked(true);
-        }
-        if (table.getTableCards().get(table.getTableCards().size()-1).getValue().equals("reverse"))
-        {
-            table.setClockWise(!table.getClockWise());
-            //block = true;
         }
         if (table.getTableCards().get(table.getTableCards().size()-1).getValue().equals("draw+2")&& !(table.getTableCards().get(table.getTableCards().size()-1).isBlocked()))
         {
@@ -141,7 +134,7 @@ public class Player implements Comparable<Player>
             }
         }
 
-        if (table.getTurn() == 0 && !block)
+        if (name.equals("player1") && !block)
         {
             System.out.println(name);
             validMove = valid(table);
@@ -160,6 +153,10 @@ public class Player implements Comparable<Player>
                 if (validMove.contains(playerCards.get(move-1)))
                 {
                     table.getTableCards().add(playerCards.get(move-1));
+                    if (table.getTableCards().get(table.getTableCards().size()-1).getValue().equals("reverse"))
+                    {
+                        table.setClockWise(!table.getClockWise());
+                    }
                     playerCards.remove(move-1);
                     if (table.getTableCards().get(table.getTableCards().size()-1).getValue().equals("wildColor"))
                     {
@@ -178,7 +175,7 @@ public class Player implements Comparable<Player>
             }
 
         }
-        else if (table.getTurn() != 0 && !block)
+        else if (!name.equals("player1") && !block)
         {
             System.out.println(name);
             validMove = valid(table);
@@ -192,6 +189,10 @@ public class Player implements Comparable<Player>
             {
                 Collections.shuffle(validMove);
                 table.getTableCards().add(validMove.get(0));
+                if (table.getTableCards().get(table.getTableCards().size()-1).getValue().equals("reverse"))
+                {
+                    table.setClockWise(!table.getClockWise());
+                }
                 if (table.getTableCards().get(table.getTableCards().size()-1).getValue().equals("wildColor"))
                 {
                     int b=0, r=0, g=0, y=0;
@@ -218,18 +219,22 @@ public class Player implements Comparable<Player>
                     if ( max == b)
                     {
                         table.setLastColor("blue");
+                        System.out.println("BLUE");
                     }
                     else if ( max == r)
                     {
                         table.setLastColor("red");
+                        System.out.println("RED");
                     }
                     else if ( max == g)
                     {
                         table.setLastColor("green");
+                        System.out.println("GREEN");
                     }
                     else
                     {
                         table.setLastColor("yellow");
+                        System.out.println("YELLOW");
                     }
                 }
                 else

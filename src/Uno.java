@@ -13,12 +13,15 @@ public class Uno
         Scanner scanMove = new Scanner(System.in);
         int numberOfPlayers = scanMove.nextInt();
 
+//        System.out.println("INSTRUCTIONS: please choose the card you want to play considering the cards you have by saying: ");
+//        System.out.println("1) it's color(e.g. red, blue, green or yellow) + pressing enter + it's action(e.g. draw, skip or reverse) + pressing enter");
+//        System.out.println("2) it's color(e.g. , blue, green or yellow) + pressing enter + it's number(0 to 9) + pressing enter");
+//        System.out.println("3) wild(if it is a wild card) + pressing enter + it's action(e.g. color or draw) + pressing enter");
         Player player1 = new Player(cardDeck, "player1");
         Player player2 = new Player(cardDeck, "player2");
         Player player3 = new Player(cardDeck, "player3");
         Player player4;
         Player player5;
-        player1.showHand();
         table.addPlayer(player1);
         table.addPlayer(player2);
         table.addPlayer(player3);
@@ -35,13 +38,13 @@ public class Uno
             table.addPlayer(player5);
         }
         table.firstCard(); //inja avalin karte table moshakhas mishe
-        System.out.println("please enter the number of the card you want to play.");
         while(table.checkWinner(numberOfPlayers))
         {
 
             table.getPlayers().get(table.getTurn()).setValidMove(table.getPlayers().get(table.getTurn()).valid(table));
             table.getPlayers().get(table.getTurn()).play(table);
             table.setDirection(numberOfPlayers);
+            table.showLastCard();
 
         }
         table.showResult();

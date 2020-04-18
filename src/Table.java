@@ -27,15 +27,23 @@ public class Table {
         return wildDraw;
     }
 
-    public void setWildDraw() {
+    public void setWildDraw1() {
         this.wildDraw++;
     }
+    public void setWildDraw(int i)
+    {
+        this.wildDraw = i;
+    }
+
 
     public int getDraw() {
         return draw;
     }
+    public void setDraw(int i) {
+        this.draw = i;
+    }
 
-    public void setDraw() {
+    public void setDraw1() {
         this.draw++;
     }
 
@@ -61,6 +69,7 @@ public class Table {
 
     public void firstCard()
     {
+        System.out.println("First Card");
         Collections.shuffle(cardDeck.getCards());
         while (cardDeck.getCards().get(cardDeck.getCards().size()-1).getColor().equals("black"))
         {
@@ -68,6 +77,7 @@ public class Table {
         }
         tableCards.add(cardDeck.getCards().get(cardDeck.getCards().size()-1));
         cardDeck.printCard(tableCards.get(0));
+        this.setLastColor(this.getTableCards().get(this.getTableCards().size()-1).getColor());
     }
     public boolean checkWinner( int num) {
         boolean winner = true;
@@ -85,9 +95,9 @@ public class Table {
         for(Player player:players)
             player.TotalScore();
         Collections.sort(players);
-        for(int i = players.size()-1 ; i >= 0 ; i--)
+        for(int i =  0; i < players.size() ; i++)
         {
-            System.out.println(players.size() - i + "-" + " score:" + players.get(i).getScore());
+            System.out.println((i+1) + "-" + players.get(i).getName() + " score:" + players.get(i).getScore());
         }
     }
 
@@ -108,5 +118,10 @@ public class Table {
             else
                 turn--;
         }
+    }
+    public void showLastCard()
+    {
+        System.out.println("last Card");
+        cardDeck.printCard(tableCards.get(tableCards.size()-1));
     }
 }

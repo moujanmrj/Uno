@@ -67,7 +67,7 @@ public class Player implements Comparable<Player> {
      * this is the constructor and makes a new player
      *
      * @param cardDeck the deck of cards
-     * @param name name of the player
+     * @param name     name of the player
      */
     public Player(CardDeck cardDeck, String name) {
         score = 0;
@@ -111,15 +111,25 @@ public class Player implements Comparable<Player> {
      */
     public ArrayList<UnoCard> valid(Table table) {
         ArrayList<UnoCard> validMove = new ArrayList<>();
+        if (table.getTableCards().get(table.getTableCards().size()-1).getValue().equals("draw+2") &&!table.getTableCards().get(table.getTableCards().size()-1).isBlocked())
+        {
+            for (UnoCard card : playerCards)
+            {
+                if (card.getValue().equals("draw+2"))
+                    validMove.add(card);
+            }
+            return validMove;
+        }
         for (UnoCard card : playerCards) {
-            if (table.getLastColor().equals(card.getColor()) || table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals(card.getValue())) {
+            if (!card.getColor().equals("black") && table.getLastColor().equals(card.getColor()) || table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals(card.getValue())) {
                 validMove.add(card);
             }
         }
-        int validSize = validMove.size();
+
+        boolean noValid = validMove.size() == 0;
         for (UnoCard playerCard : playerCards) {
             if (playerCard.getColor().equals("black")) {
-                if (validSize == 0) {
+                if (noValid) {
                     validMove.add(playerCard);
                 }
             }
@@ -128,7 +138,7 @@ public class Player implements Comparable<Player> {
     }
 
     /**
-     * this method is for playing and the moves 
+     * this method is for playing and the moves
      *
      * @param table the table we're playing on
      */
@@ -138,9 +148,10 @@ public class Player implements Comparable<Player> {
             block = true;
             table.getTableCards().get(table.getTableCards().size() - 1).setBlocked(true);
         }
-        if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("draw+2") && !(table.getTableCards().get(table.getTableCards().size() - 1).isBlocked())) {
+        else if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("draw+2") && !(table.getTableCards().get(table.getTableCards().size() - 1).isBlocked())) {
             boolean draw2 = false;
             table.setDraw1();
+            validMove = valid(table);
             for (UnoCard search : validMove) {
                 if (search.getValue().equals("draw+2")) {
                     draw2 = true;
@@ -148,20 +159,19 @@ public class Player implements Comparable<Player> {
                 }
             }
             if (!draw2) {
+                table.getTableCards().get(table.getTableCards().size() - 1).setBlocked(true);
                 for (int i = 0; i < table.getDraw() * 2; i++) {
                     playerCards.add(cardDeck.getCards().get(0));
                     cardDeck.getCards().remove(0);
                 }
-                table.getTableCards().get(table.getTableCards().size() - 1).setBlocked(true);
                 block = true;
                 table.setDraw(0);
             }
-
-
         }
-        if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildDraw+4") && !(table.getTableCards().get(table.getTableCards().size() - 1).isBlocked())) {
+        else if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildDraw+4") && !(table.getTableCards().get(table.getTableCards().size() - 1).isBlocked())) {
             boolean wildDraw = false;
             table.setWildDraw1();
+            validMove = valid(table);
             for (UnoCard search : validMove) {
                 if (search.getValue().equals("wildDraw+4")) {
                     wildDraw = true;
@@ -169,11 +179,11 @@ public class Player implements Comparable<Player> {
                 }
             }
             if (!wildDraw) {
+                table.getTableCards().get(table.getTableCards().size() - 1).setBlocked(true);
                 for (int i = 0; i < table.getDraw() * 4; i++) {
                     playerCards.add(cardDeck.getCards().get(0));
                     cardDeck.getCards().remove(0);
                 }
-                table.getTableCards().get(table.getTableCards().size() - 1).setBlocked(true);
                 table.setWildDraw(0);
                 block = true;
             }
@@ -183,6 +193,7 @@ public class Player implements Comparable<Player> {
             System.out.println(name);
             validMove = valid(table);
             if (validMove.size() == 0) {
+                System.out.println("card was added!");
                 playerCards.add(cardDeck.getCards().get(0));
                 cardDeck.getCards().remove(0);
             }
@@ -195,11 +206,13 @@ public class Player implements Comparable<Player> {
                 if (validMove.contains(playerCards.get(move - 1))) {
                     table.getTableCards().add(playerCards.get(move - 1));
                     if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("reverse")) {
-                        table.setClockWise(!table.getClockWise());
+                        table.setClockWise(!table.isClockWise());
                     }
                     playerCards.remove(move - 1);
                     if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildColor")) {
+                        System.out.println("Choose Your Color :");
                         String color = scanner.nextLine();
+                        color = scanner.nextLine();
                         table.setLastColor(color);
                     } else {
                         table.setLastColor(table.getTableCards().get(table.getTableCards().size() - 1).getColor());
@@ -209,10 +222,12 @@ public class Player implements Comparable<Player> {
                 }
             }
 
-        } else if (!name.equals("player1") && !block) {
+        }
+        else if (!name.equals("player1") && !block) {
             System.out.println(name);
             validMove = valid(table);
             if (validMove.size() == 0) {
+                System.out.println("card was added.");
                 playerCards.add(cardDeck.getCards().get(0));
                 cardDeck.getCards().remove(0);
             }
@@ -221,7 +236,7 @@ public class Player implements Comparable<Player> {
                 Collections.shuffle(validMove);
                 table.getTableCards().add(validMove.get(0));
                 if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("reverse")) {
-                    table.setClockWise(!table.getClockWise());
+                    table.setClockWise(!table.isClockWise());
                 }
                 if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildColor")) {
                     int b = 0, r = 0, g = 0, y = 0;

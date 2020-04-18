@@ -35,12 +35,14 @@ public class Table {
         return tableCards;
     }
 
+
+
     /**
      * this method returns the direction we're playing
      *
      * @return direction we're playing
      */
-    public boolean getClockWise() {
+    public boolean isClockWise() {
         return clockWise;
     }
 /////////////////////////////////////////////////////////////////

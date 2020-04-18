@@ -1,194 +1,112 @@
-import jdk.nashorn.api.tree.LiteralTree;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 
-public class Table
-{
+
+public class Table {
+
     private ArrayList<UnoCard> tableCards;
     private CardDeck cardDeck;
-    private boolean direction;
+    private boolean clockWise;
     private ArrayList<UnoCard> validCards;
+    private ArrayList<Player> players;
+    private int turn;
+    private String lastColor;
+    private int wildDraw = 0;
+    private int draw = 0;
 
-    public ArrayList<UnoCard> getTableCards() { return tableCards; }
+    public ArrayList<UnoCard> getTableCards() {
+        return tableCards;
+    }
     public CardDeck getCardDeck() { return cardDeck; }
-    public boolean getDirection() { return direction; }
+    public boolean getClockWise() { return clockWise; }
     public ArrayList<UnoCard> getValidCards() { return validCards; }
+    public int getTurn() { return turn; }
+    public String getLastColor() { return lastColor; }
+
+    public int getWildDraw() {
+        return wildDraw;
+    }
+
+    public void setWildDraw() {
+        this.wildDraw++;
+    }
+
+    public int getDraw() {
+        return draw;
+    }
+
+    public void setDraw() {
+        this.draw++;
+    }
 
     public void setTableCards(ArrayList<UnoCard> tableCards) { this.tableCards = tableCards; }
     public void setCardDeck(CardDeck cardDeck) { this.cardDeck = cardDeck; }
-    public void setDirection(boolean direction) { this.direction = direction; }
+    public void setClockWise(boolean clockWise) { this.clockWise = clockWise; }
     public void setValidCards(ArrayList<UnoCard> validCards) { this.validCards = validCards; }
+    public ArrayList<Player> getPlayers() { return players; }
+    public void setTurn(int turn) { this.turn += turn; }
+    public void setLastColor(String lastColor) { this.lastColor = lastColor; }
 
-    public Table(CardDeck cardDeck)
-    {
+    public Table(CardDeck cardDeck) {
+        players = new ArrayList<>();
+        tableCards = new ArrayList<>();
         this.cardDeck = cardDeck;
-        direction = true;
+        clockWise = true;
+        turn = 0;
     }
 
-    public void firstCard(ArrayList<UnoCard> playCards)
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public void firstCard()
     {
-        tableCards = new ArrayList<>();
-        Collections.shuffle(playCards);
-        tableCards.add(playCards.get(0));
-        playCards.remove(0);
+        Collections.shuffle(cardDeck.getCards());
+        while (cardDeck.getCards().get(cardDeck.getCards().size()-1).getColor().equals("black"))
+        {
+            Collections.shuffle(cardDeck.getCards());
+        }
+        tableCards.add(cardDeck.getCards().get(cardDeck.getCards().size()-1));
         cardDeck.printCard(tableCards.get(0));
     }
-    public ArrayList<UnoCard> validCart()
-    {
-        
-    }
-    public int readCard(String colorMode, String actionNum, Player player)
-    {
-        int mode = 0;
-        int i = 0;
-        boolean put = false;
-        Iterator<UnoCard> iterator = player.getPlayerCards().iterator();
-        for (UnoCard find:player.getPlayerCards())
-        {
-            if
-            if (tableCards.get(tableCards.size()-1)instanceof WildDraw && colorMode.equals("wild") && actionNum.equals("draw"))
-            {
-                put = true;
-                iterator.remove();
-                tableCards.add(player.getPlayerCards().get(i));
-                mode = applyEffectWildDraw();
-                break;
-            }
-            else if (tableCards.get(tableCards.size()-1)instanceof WildColor && colorMode.equals("wild") && actionNum.equals("color"))
-            {
-                put = true;
-                iterator.remove();
-                tableCards.add(player.getPlayerCards().get(i));
-                mode = applyEffectWildColor();
-                break;
-            }
-            boolean checkHand = false;
-            for ()
-            else if (colorMode.equals("wild"))
-            {
-
-            }
-            else if (tableCards.get(tableCards.size()-1)instanceof Draw  && actionNum.equals("draw") && (tableCards.get(tableCards.size()-1).getColor().equals(colorMode)))
-            {
-                put = true;
-                iterator.remove();
-                tableCards.add(player.getPlayerCards().get(i));
-                mode = applyEffectDraw();
-                break;
-            }
-            else if (tableCards.get(tableCards.size()-1)instanceof Skip && actionNum.equals("skip") && (tableCards.get(tableCards.size()-1).getColor().equals(colorMode)))
-            {
-                put = true;
-                iterator.remove();
-                tableCards.add(player.getPlayerCards().get(i));
-                mode = applyEffectSkip();
-                break;
-            }
-            else if (tableCards.get(tableCards.size()-1)instanceof Reverse && actionNum.equals("reverse") && (tableCards.get(tableCards.size()-1).getColor().equals(colorMode)))
-            {
-                put = true;
-                iterator.remove();
-                tableCards.add(player.getPlayerCards().get(i));
-                mode = applyEffectReverse();
-                break;
-            }
-            else if (tableCards.get(tableCards.size()-1)instanceof NumberCard && (tableCards.get(tableCards.size()-1).getColor().equals(colorMode)))
-            {
-                put = true;
-                iterator.remove();
-                tableCards.add(player.getPlayerCards().get(i));
-                mode = 7;
-                break;
-            }
-            i++;
-        }
-        if (put)
-
-            cardDeck.printCard(tableCards.get(tableCards.size()-1));
-        return mode;
-    }
-
-    public int applyEffectWildDraw()
-    {
-        return 4;
-    }
-
-    public int applyEffectWildColor()
-    {
-        return 3;
-    }
-
-    public int applyEffectDraw()
-    {
-        return 5;
-    }
-
-    public int applyEffectSkip()
-    {
-        return 6;
-    }
-
-    public int applyEffectReverse()
-    {
-        setDirection(!direction);
-        if (getDirection())
-            return 1;
-        else
-            return 2;
-    }
-
-    public void showDirection()
-    {
-        if (direction)
-            System.out.println("clock wise 1 2 3 4 5");
-        else
-            System.out.println("non-clock wise 5 4 3 2 1");
-    }
-
-//    public void AIPlayers(Player player)
-//    {
-//        Iterator<UnoCard> iterator = player.getPlayerCards().iterator();
-//        int i = 0;
-//        while(iterator.hasNext())
-//        {
-//
-//            if (tableCards.get(tableCards.size()-1).getColor().equals(iterator.))
-//        i++;
-//        }
-//    }
-
-    public boolean checkWinner(ArrayList<Player> players, int num)
-    {
+    public boolean checkWinner( int num) {
         boolean winner = true;
-        for (int i=0; i<num; i++)
-        {
-            if (players.get(i).TotalScore() == 0)
-            {
+        for (int i = 0; i < num-1; i++) {
+            if (players.get(i).getPlayerCards().size() == 0) {
                 winner = false;
                 break;
             }
         }
-        if (!winner)
-        {
-//            displayWinner(players, num);
-        }
         return winner;
     }
 
-//    public void displayWinner(ArrayList<Player> players, int num)
-//    {
-//        ArrayList<Player> result = new ArrayList<>();
-//        for (int i=0; i<num; i++)
-//        {
-//            result = players;
-//        }
-//        Collections.sort(result.get(i).TotalScore());
-//        for (int i=0; i<num; i++)
-//        {
-//
-//        }
-//    }
+    public void showResult()
+    {
+        for(Player player:players)
+            player.TotalScore();
+        Collections.sort(players);
+        for(int i = players.size()-1 ; i >= 0 ; i--)
+        {
+            System.out.println(players.size() - i + "-" + " score:" + players.get(i).getScore());
+        }
+    }
+
+    public void setDirection(int numOfPlayers)
+    {
+        if (clockWise)
+
+        {
+            if(turn == numOfPlayers-1)
+                turn = 0;
+            else
+                turn++;
+        }
+        else
+        {
+            if(turn == 0)
+                turn = numOfPlayers-1;
+            else
+                turn--;
+        }
+    }
 }

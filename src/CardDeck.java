@@ -17,41 +17,44 @@ public class CardDeck
         {
             for (int i=1; i<10; i++)
             {
-                cards.add(new NumberCard("blue", i,"number"));
-                cards.add(new NumberCard("red", i,"number"));
-                cards.add(new NumberCard("green", i,"number"));
-                cards.add(new NumberCard("yellow", i,"number"));
+                cards.add(new UnoCard("blue", i, "number" + i) {
+                });
+                cards.add(new UnoCard("red", i, "number" + i) {
+                });
+                cards.add(new UnoCard("green", i, "number" + i) {
+                });
+                cards.add(new UnoCard("yellow", i,"number" + i));
 
             }
         }
 
-        cards.add(new NumberCard("blue", 0,"number"));
-        cards.add(new NumberCard("red", 0,"number"));
-        cards.add(new NumberCard("green", 0,"number"));
-        cards.add(new NumberCard("yellow", 0,"number"));
+        cards.add(new UnoCard("blue", 0,"number" + 0));
+        cards.add(new UnoCard("red", 0,"number" + 0));
+        cards.add(new UnoCard("green", 0,"number"+ 0));
+        cards.add(new UnoCard("yellow", 0,"number"+ 0));
 
         for (int i=0; i<2; i++)
         {
-            cards.add(new Reverse("blue","reverse"));
-            cards.add(new Reverse("red","reverse"));
-            cards.add(new Reverse("green","reverse"));
-            cards.add(new Reverse("yellow","reverse"));
+            cards.add(new UnoCard("blue",20,"reverse"));
+            cards.add(new UnoCard("red",20,"reverse"));
+            cards.add(new UnoCard("green",20,"reverse"));
+            cards.add(new UnoCard("yellow",20,"reverse"));
 
-            cards.add(new Skip("blue","skip"));
-            cards.add(new Skip("red","skip"));
-            cards.add(new Skip("green","skip"));
-            cards.add(new Skip("yellow","skip"));
+            cards.add(new UnoCard("blue",20,"skip"));
+            cards.add(new UnoCard("red",20,"skip"));
+            cards.add(new UnoCard("green",20,"skip"));
+            cards.add(new UnoCard("yellow",20,"skip"));
 
-            cards.add(new Draw("blue","draw +2"));
-            cards.add(new Draw("red","draw +2"));
-            cards.add(new Draw("green","draw +2"));
-            cards.add(new Draw("yellow","draw +2"));
+            cards.add(new UnoCard("blue",20,"draw+2"));
+            cards.add(new UnoCard("red",20,"draw+2"));
+            cards.add(new UnoCard("green",20,"draw+2"));
+            cards.add(new UnoCard("yellow",20,"draw+2"));
         }
 
         for (int i=0; i<4; i++)
         {
-            cards.add(new WildDraw("black","wild draw +4"));
-            cards.add(new WildColor("black","wild color"));
+            cards.add(new UnoCard("black",50,"wildDraw+4"));
+            cards.add(new UnoCard("black",50,"wildColor"));
         }
     }
 
@@ -77,7 +80,7 @@ public class CardDeck
                 if (print.getClass().getName().equals("NumberCard"))
                     System.out.println("\u001B[34m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
                 else
-                    System.out.println("\u001B[34m" + "*    " + print.getClass().getName() + "\u001B[0m");
+                    System.out.println("\u001B[34m" + "*    " + print.getValue() + "\u001B[0m");
                 System.out.println("\u001B[34m" + "*              *" + "\u001B[0m");
                 System.out.println("\u001B[34m" + "****************" + "\u001B[0m");
                 break;
@@ -87,7 +90,7 @@ public class CardDeck
                 if (print.getClass().getName().equals("NumberCard"))
                     System.out.println("\u001B[31m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
                 else
-                    System.out.println("\u001B[31m" + "*    " + print.getClass().getName() + "\u001B[0m");
+                    System.out.println("\u001B[31m" + "*    " + print.getValue() + "\u001B[0m");
                 System.out.println("\u001B[31m" + "*              *" + "\u001B[0m");
                 System.out.println("\u001B[31m" + "****************" + "\u001B[0m");
 
@@ -98,7 +101,7 @@ public class CardDeck
                 if (print.getClass().getName().equals("NumberCard"))
                     System.out.println("\u001B[32m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
                 else
-                    System.out.println("\u001B[32m" + "*    " + print.getClass().getName() + "\u001B[0m");
+                    System.out.println("\u001B[32m" + "*    " + print.getValue() + "\u001B[0m");
                 System.out.println("\u001B[32m" + "*              *" + "\u001B[0m");
                 System.out.println("\u001B[32m" + "****************" + "\u001B[0m");
                 break;
@@ -108,14 +111,14 @@ public class CardDeck
                 if (print.getClass().getName().equals("NumberCard"))
                     System.out.println("\u001B[33m" + "*      " + print.getValue() + "       *" + "\u001B[0m");
                 else
-                    System.out.println("\u001B[33m" + "*    " + print.getClass().getName() + "\u001B[0m");
+                    System.out.println("\u001B[33m" + "*    " + print.getValue() + "\u001B[0m");
                 System.out.println("\u001B[33m" + "*              *" + "\u001B[0m");
                 System.out.println("\u001B[33m" + "****************" + "\u001B[0m");
                 break;
             case "black":
                 System.out.println("****************");
                 System.out.println("*              *");
-                System.out.println("*   " + print.getClass().getName());
+                System.out.println("*   " + print.getValue());
                 System.out.println("*              *");
                 System.out.println("****************");
                 break;

@@ -139,6 +139,8 @@ public class Player implements Comparable<Player> {
 
     /**
      * this method is for playing and the moves
+     * and implements game rules 
+     * and is basically one of the main methods in this code
      *
      * @param table the table we're playing on
      */
@@ -146,6 +148,7 @@ public class Player implements Comparable<Player> {
         boolean block = false;
         if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("skip") && !(table.getTableCards().get(table.getTableCards().size() - 1).isBlocked())) {
             block = true;
+            System.out.println(name + ": Your turn is SKIPPED");
             table.getTableCards().get(table.getTableCards().size() - 1).setBlocked(true);
         }
         else if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("draw+2") && !(table.getTableCards().get(table.getTableCards().size() - 1).isBlocked())) {
@@ -165,6 +168,7 @@ public class Player implements Comparable<Player> {
                     cardDeck.getCards().remove(0);
                 }
                 block = true;
+                System.out.println(name + ": Your turn is SKIPPED");
                 table.setDraw(0);
             }
         }
@@ -184,8 +188,9 @@ public class Player implements Comparable<Player> {
                     playerCards.add(cardDeck.getCards().get(0));
                     cardDeck.getCards().remove(0);
                 }
-                table.setWildDraw(0);
                 block = true;
+                System.out.println(name + ": Your turn is SKIPPED");
+                table.setWildDraw(0);
             }
         }
 
@@ -207,6 +212,11 @@ public class Player implements Comparable<Player> {
                     table.getTableCards().add(playerCards.get(move - 1));
                     if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("reverse")) {
                         table.setClockWise(!table.isClockWise());
+                    }
+                    if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildDraw+4"))
+                    {
+                        System.out.println("Choose your Color:");
+                        table.setLastColor(scanner.nextLine());
                     }
                     playerCards.remove(move - 1);
                     if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildColor")) {
@@ -237,6 +247,41 @@ public class Player implements Comparable<Player> {
                 table.getTableCards().add(validMove.get(0));
                 if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("reverse")) {
                     table.setClockWise(!table.isClockWise());
+                }
+                if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildDraw+4"))
+                {
+                    int b = 0, r = 0, g = 0, y = 0;
+                    for (UnoCard set : playerCards) {
+                        switch (set.getColor()) {
+                            case "blue":
+                                b++;
+                                break;
+                            case "red":
+                                r++;
+                                break;
+                            case "green":
+                                g++;
+                                break;
+                            case "yellow":
+                                y++;
+                                break;
+                        }
+                    }
+                    int max = Math.max(Math.max(r, b), Math.max(g, y));
+
+                    if (max == b) {
+                        table.setLastColor("blue");
+                        System.out.println("BLUE");
+                    } else if (max == r) {
+                        table.setLastColor("red");
+                        System.out.println("RED");
+                    } else if (max == g) {
+                        table.setLastColor("green");
+                        System.out.println("GREEN");
+                    } else {
+                        table.setLastColor("yellow");
+                        System.out.println("YELLOW");
+                    }
                 }
                 if (table.getTableCards().get(table.getTableCards().size() - 1).getValue().equals("wildColor")) {
                     int b = 0, r = 0, g = 0, y = 0;

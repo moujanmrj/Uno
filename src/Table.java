@@ -90,14 +90,18 @@ public class Table {
     }
 
     /**
-     *this method sets continuous wild draws (in another way)
+     * this method sets continuous wild draws (in another way)
+     *
+     * @param i the continuous
      */
     public void setWildDraw(int i) {
         this.wildDraw = i;
     }
 
     /**
-     *this method sets continuous draws
+     * this method sets continuous draws
+     *
+     * @param i the continuous
      */
     public void setDraw(int i) {
         this.draw = i;
